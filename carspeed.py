@@ -24,6 +24,27 @@ def secs_diff(endTime, begTime):
     diff = (endTime - begTime).total_seconds()
     return diff    
 
+# mouse callback function for drawing scale
+def draw_line(event,x,y,flags,param):
+    global ix,iy,fx,fy,drawing,setup_complete,image, org_image, prompt
+
+    if event == cv2.EVENT_LBUTTONDOWN:
+        drawing = True
+        ix,iy = x,y
+
+    elif event == cv2.EVENT_MOUSEMOVE:
+        if drawing == True:
+            image = org_image.copy()
+            prompt_on_image(prompt)
+            cv2.line(image,(ix,iy),(x,y),(0,255,0),5)
+
+    elif event == cv2.EVENT_LBUTTONUP:
+        drawing = False
+        fx,fy = x,y
+        image = org_image.copy()
+        prompt_on_image(prompt)
+        cv2.line(image,(ix,iy),(fx,fy),(0,255,0),5)
+        
 # mouse callback function for drawing capture area
 def draw_rectangle(event,x,y,flags,param):
     global ix,iy,fx,fy,drawing,setup_complete,image, org_image, prompt
@@ -129,6 +150,23 @@ rawCapture.truncate(0)
 org_image = image.copy()
 
 prompt = "Define the monitored area - press 'c' to continue" 
+prompt_on_image(prompt)
+ 
+# wait while the user draws the monitored area's boundry
+while not setup_complete:
+    cv2.imshow("Speed Camera",image)
+ 
+    #wait for for c to be pressed  
+    key = cv2.waitKey(1) & 0xFF
+  
+    # if the `c` key is pressed, break from the loop
+    if key == ord("c"):
+        break
+    
+# call the draw_rectangle routines when the mouse is used
+cv2.setMouseCallback('Speed Camera',draw_line)
+
+prompt = "Define the frame scale - press 'c' to continue" 
 prompt_on_image(prompt)
  
 # wait while the user draws the monitored area's boundry
