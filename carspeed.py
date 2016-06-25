@@ -67,7 +67,7 @@ def draw_rectangle(event,x,y,flags,param):
         cv2.rectangle(image,(ix,iy),(fx,fy),(0,255,0),2)
         
 # define some constants
-DISTANCE = 76  #<---- enter your distance-to-road value here
+DISTANCE = 20  #<---- enter your distance-to-road value here
 THRESHOLD = 15
 MIN_AREA = 175
 BLURSIZE = (15,15)
