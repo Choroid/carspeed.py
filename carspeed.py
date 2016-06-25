@@ -129,8 +129,8 @@ prompt = ''
 camera = PiCamera()
 camera.resolution = RESOLUTION
 camera.framerate = FPS
-camera.vflip = True
-camera.hflip = True
+camera.vflip = False
+camera.hflip = False
 
 rawCapture = PiRGBArray(camera, size=camera.resolution)
 # allow the camera to warm up
