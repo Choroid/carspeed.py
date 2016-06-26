@@ -15,7 +15,7 @@ def prompt_on_image(txt):
 # calculate speed from pixels and time
 def get_speed(pixels, ftperpixel, secs):
     if secs > 0.0:
-        return ((pixels * ftperpixel)/ secs) * 0.681818  
+        return ((pixels * ftperpixel)/ secs) * 0.681818 # fps to mph
     else:
         return 0.0
  
@@ -143,7 +143,7 @@ cv2.moveWindow("Speed Camera", 10, 40)
 # call the draw_rectangle routines when the mouse is used
 cv2.setMouseCallback('Speed Camera',draw_rectangle)
  
-# grab a reference image to use for drawing the monitored area's boundry
+# grab a reference image to use for drawing the monitored area's boundary
 camera.capture(rawCapture, format="bgr", use_video_port=True)
 image = rawCapture.array
 rawCapture.truncate(0)
@@ -152,7 +152,7 @@ org_image = image.copy()
 prompt = "Define the monitored area - press 'c' to continue" 
 prompt_on_image(prompt)
  
-# wait while the user draws the monitored area's boundry
+# wait while the user draws the monitored area's boundary
 while not setup_complete:
     cv2.imshow("Speed Camera",image)
  
@@ -169,7 +169,7 @@ cv2.setMouseCallback('Speed Camera',draw_line)
 prompt = "Define the frame scale - press 'c' to continue" 
 prompt_on_image(prompt)
  
-# wait while the user draws the monitored area's boundry
+# wait while the user draws the monitored area's boundary
 while not setup_complete:
     cv2.imshow("Speed Camera",image)
  
