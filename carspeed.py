@@ -29,7 +29,7 @@ def secs_diff(endTime, begTime):
 
 
 # mouse callback function for drawing scale
-def draw_line(event, x, y, flags, param):
+def draw_line(event, x, y):
     global ix, iy, fx, fy, drawing, setup_complete, image, org_image, prompt
 
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -40,18 +40,18 @@ def draw_line(event, x, y, flags, param):
         if drawing:
             image = org_image.copy()
             prompt_on_image(prompt)
-            cv2.line(image, (ix, iy), (x, y), (0, 255, 0), 5)
+            cv2.line(image, (ix, iy), (x, y), (0, 255, 0), 2)
 
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
         fx, fy = x, y
         image = org_image.copy()
         prompt_on_image(prompt)
-        cv2.line(image, (ix, iy), (fx, fy), (0, 255, 0), 5)
+        cv2.line(image, (ix, iy), (fx, fy), (0, 255, 0), 2)
 
 
 # mouse callback function for drawing capture area
-def draw_rectangle(event, x, y, flags, param):
+def draw_rectangle(event, x, y):
     global ix, iy, fx, fy, drawing, setup_complete, image, org_image, prompt
  
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -271,7 +271,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     if motion_found:
         if state == WAITING:
-            # intialize tracking
+            # initialize tracking
             state = TRACKING
             initial_x = x
             last_x = x
