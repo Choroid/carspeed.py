@@ -10,6 +10,8 @@ IMAGEHEIGHT = 480
 RESOLUTION = [IMAGEWIDTH, IMAGEHEIGHT]
 FOV = 53.5
 FPS = 30
+VFLIP = False
+HFLIP = False
 
 # the following enumerated values are used to make the program more readable
 WAITING = 0

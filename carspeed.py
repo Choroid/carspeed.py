@@ -13,8 +13,8 @@ print("Image width in feet {} at {} from camera".format("%.0f" % frame_width_ft,
 camera = PiCamera()
 camera.resolution = RESOLUTION
 camera.framerate = FPS
-camera.vflip = False
-camera.hflip = False
+camera.vflip = VFLIP
+camera.hflip = HFLIP
 
 rawCapture = PiRGBArray(camera, size=camera.resolution)
 # allow the camera to warm up
