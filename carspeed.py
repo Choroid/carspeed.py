@@ -4,8 +4,9 @@ from picamera import PiCamera
 import time
 import datetime
 import cv2
-from functions import *
+import functions
 from constants import *
+
 
 print("Image width in feet {} at {} from camera".format("%.0f" % frame_width_ft, "%.0f" % DISTANCE))
 
@@ -25,7 +26,7 @@ cv2.namedWindow("Speed Camera")
 cv2.moveWindow("Speed Camera", 10, 40)
 
 # call the draw_rectangle routines when the mouse is used
-cv2.setMouseCallback('Speed Camera', draw_rectangle)
+cv2.setMouseCallback('Speed Camera', functions.draw_rectangle)
  
 # grab a reference image to use for drawing the monitored area's boundary
 camera.capture(rawCapture, format="bgr", use_video_port=True)
@@ -34,7 +35,7 @@ rawCapture.truncate(0)
 org_image = image.copy()
 
 prompt = "Define the monitored area - press 'c' to continue" 
-prompt_on_image(prompt)
+functions.prompt_on_image(prompt)
  
 # wait while the user draws the monitored area's boundary
 while not setup_complete:
@@ -48,10 +49,10 @@ while not setup_complete:
         break
     
 # call the draw_rectangle routines when the mouse is used
-cv2.setMouseCallback('Speed Camera', draw_line)
+cv2.setMouseCallback('Speed Camera', functions.draw_line)
 
 prompt = "Define the frame scale - press 'c' to continue" 
-prompt_on_image(prompt)
+functions.prompt_on_image(prompt)
  
 # wait while the user draws the monitored area's boundary
 while not setup_complete:
@@ -167,8 +168,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                 else:
                     direction = RIGHT_TO_LEFT
                     abs_chg = initial_x - x
-                secs = secs_diff(timestamp, initial_time)
-                mph = get_speed(abs_chg, ftperpixel, secs)
+                secs = functions.secs_diff(timestamp, initial_time)
+                mph = functions.get_speed(abs_chg, ftperpixel, secs)
                 print("--> chg={}  secs={}  mph={} this_x={} w={} ".format(abs_chg, secs, "%.0f" % mph, x, w))
                 real_y = upper_left_y + y
                 real_x = upper_left_x + x
